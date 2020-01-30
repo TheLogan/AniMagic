@@ -1,14 +1,21 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Switch, RouteComponentProps } from "react-router-dom";
+import { Main } from "./Components/Routes/Main";
+import { EditAnimation } from "./Components/Routes/EditAnimation";
 
-const App: React.FC = () => {
+interface IProps extends RouteComponentProps { }
 
+function App(props: IProps) {
 
   return (
-    <div className="App">
-      Hello world!
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/newclip" />
+        <Route path="/newanimation" component={EditAnimation} />
+        <Route path="/" component={Main} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
