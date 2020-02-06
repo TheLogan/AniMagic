@@ -1,4 +1,6 @@
 import { ServoGeneralOption, Servo } from 'johnny-five';
+import { readFileSync } from "fs";
+import * as path from "path";
 
 export function createServos() {
 
@@ -19,16 +21,16 @@ export function createServos() {
   return arr;
 }
 
-// let a = servos[0]; // horizontal
-// let b = servos[1]; // vertical
-// let c = servos[2]; // left lid up
-// let d = servos[3]; // left lid down
-// let e = servos[4]; // right lid up
-// let f = servos[5]; // right lid down
-
 
 export function sleep(time: number) {
   return new Promise((resolve) => {
     setTimeout(() => { resolve() }, time)
   })
+}
+
+export function loadJson() {
+  let filepath = path.join(__dirname, 'MockData/Rig.jsonc')
+  let file = readFileSync(filepath, 'utf8');
+  let data = JSON.parse(file);
+  console.log('data', data);
 }

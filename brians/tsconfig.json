@@ -5,6 +5,7 @@
     "rootDir": "src",
     "moduleResolution": "node",
     "module": "commonjs",
+    "resolveJsonModule": true,
     "lib": [
       "es2017"
     ],
@@ -17,6 +18,8 @@
     ]
   },
   "include": [
+    "src/**/*.json",
+    "src/**/*.jsonc",
     "src/**/*.ts"
   ],
   "exclude": [

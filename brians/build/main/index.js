@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const johnny_five_1 = require("johnny-five");
 const helpers_1 = require("./helpers");
 const d3 = require("d3-interpolate");
-const cServo_1 = require("./cServo");
+const cServo_1 = require("./Classes/cServo");
 const board = new johnny_five_1.Board();
 let closedEyes = [
     new cServo_1.cServo('c', 90, 200),
@@ -17,16 +17,19 @@ let openEyes = [
     new cServo_1.cServo('e', 140, 200),
     new cServo_1.cServo('f', 30, 200),
 ];
-let animations = [openEyes, closedEyes, openEyes, closedEyes];
+let lookLeft = [new cServo_1.cServo('a', 0, 200)];
+let lookRight = [new cServo_1.cServo('a', 180, 200)];
+let lookUp = [new cServo_1.cServo('b', 0, 200)];
+let lookDown = [new cServo_1.cServo('b', 180, 200)];
+let animations = [openEyes, closedEyes, openEyes, lookUp, lookLeft];
 board.on('ready', async () => {
     let servos = helpers_1.createServos();
+    helpers_1.loadJson();
     for (const servo of servos) {
         servo.center();
     }
     await helpers_1.sleep(500);
     servoLoop(servos);
-    // a.to(130);
-    // b.to(130);
 });
 async function servoLoop(servos) {
     let currentStep = 0;
@@ -40,9 +43,10 @@ async function servoLoop(servos) {
             x.currentTime++;
             return;
         });
-        console.log('currentStep', currentStep);
-        console.log('servoArr[0].currentTime', servoArr[0].currentTime, 'servoArr[0].totalTime', servoArr[0].totalTime);
+        // console.log('currentStep', currentStep);
+        // console.log('servoArr[0].currentTime', servoArr[0].currentTime, 'servoArr[0].totalTime', servoArr[0].totalTime)
         if (servoArr[currentStep].currentTime >= servoArr[currentStep].totalTime) {
+            console.log('currentStep', currentStep);
             currentStep++;
             servoArr = animations[currentStep];
             if (servoArr == null)

@@ -1,13 +1,14 @@
 {
-  "name": "nodebot",
+  "name": "brian",
   "version": "1.0.0",
   "description": "",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "scripts": {
     "start": "npm run build && node build/main/index.js",
-    "build": "run-s clean && run-p build:*",
+    "build": "run-s clean && run-p build:* && npm run copyFiles",
     "build:main": "tsc -p tsconfig.json",
+    "copyFiles": "node postinstall.js",
     "clean": "trash build test"
   },
   "keywords": [],
@@ -17,7 +18,8 @@
     "@types/d3-interpolate": "^1.3.1",
     "@types/johnny-five": "^1.3.0",
     "d3-interpolate": "^1.4.0",
-    "johnny-five": "^1.4.0"
+    "johnny-five": "^1.4.0",
+    "ncp": "^2.0.0"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",

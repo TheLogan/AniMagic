@@ -1,7 +1,7 @@
 import { Board, Servo } from 'johnny-five';
-import { createServos, sleep } from "./helpers";
+import { createServos, sleep, loadJson } from "./helpers";
 import * as d3 from "d3-interpolate";
-import { cServo } from "./cServo";
+import { cServo } from "./Classes/cServo";
 
 const board = new Board();
 let closedEyes = [
@@ -18,10 +18,16 @@ let openEyes = [
   new cServo('f', 30, 200),
 ]
 
-let animations = [openEyes, closedEyes, openEyes, closedEyes]
+let lookLeft =  [new cServo('a', 0, 200)]
+let lookRight = [new cServo('a', 180, 200)]
+let lookUp =    [new cServo('b', 0, 200)]
+let lookDown =  [new cServo('b', 180, 200)]
+
+let animations = [openEyes, closedEyes, openEyes, lookUp, lookLeft]
 
 board.on('ready', async () => {
   let servos = createServos();
+  loadJson();
 
 
   for (const servo of servos) {
@@ -29,9 +35,6 @@ board.on('ready', async () => {
   }
   await sleep(500);
   servoLoop(servos);
-
-  // a.to(130);
-  // b.to(130);
 });
 
 async function servoLoop(servos: Servo[]) {
@@ -48,9 +51,10 @@ async function servoLoop(servos: Servo[]) {
       x.currentTime++;
       return;
     });
-    console.log('currentStep', currentStep);
-    console.log('servoArr[0].currentTime', servoArr[0].currentTime, 'servoArr[0].totalTime', servoArr[0].totalTime)
+    // console.log('currentStep', currentStep);
+    // console.log('servoArr[0].currentTime', servoArr[0].currentTime, 'servoArr[0].totalTime', servoArr[0].totalTime)
     if (servoArr[currentStep].currentTime >= servoArr[currentStep].totalTime) {
+      console.log('currentStep', currentStep);
       currentStep++;
       servoArr = animations[currentStep];
       if (servoArr == null) break;
