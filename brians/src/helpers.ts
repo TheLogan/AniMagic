@@ -29,8 +29,8 @@ export function sleep(time: number) {
 }
 
 export function loadJson() {
-  let filepath = path.join(__dirname, 'MockData/Rig.jsonc')
-  let file = readFileSync(filepath, 'utf8');
-  let data = JSON.parse(file);
-  console.log('data', data);
+  // let filepath = path.join(__dirname, 'MockData/Rig.jsonc')
+  // let file = readFileSync(filepath, 'utf8');
+  // let data = JSON.parse(file);
+  // console.log('data', data);
 }

@@ -24,12 +24,12 @@ let lookDown = [new cServo_1.cServo('b', 180, 200)];
 let animations = [openEyes, closedEyes, openEyes, lookUp, lookLeft];
 board.on('ready', async () => {
     let servos = helpers_1.createServos();
-    helpers_1.loadJson();
+    // loadJson();
     for (const servo of servos) {
         servo.center();
     }
     await helpers_1.sleep(500);
-    servoLoop(servos);
+    // servoLoop(servos);
 });
 async function servoLoop(servos) {
     let currentStep = 0;
@@ -45,12 +45,11 @@ async function servoLoop(servos) {
         });
         // console.log('currentStep', currentStep);
         // console.log('servoArr[0].currentTime', servoArr[0].currentTime, 'servoArr[0].totalTime', servoArr[0].totalTime)
-        if (servoArr[currentStep].currentTime >= servoArr[currentStep].totalTime) {
-            console.log('currentStep', currentStep);
-            currentStep++;
-            servoArr = animations[currentStep];
-            if (servoArr == null)
-                break;
-        }
+        // if (servoArr[currentStep].currentTime >= servoArr[currentStep].totalTime) {
+        //   console.log('currentStep', currentStep);
+        //   currentStep++;
+        //   servoArr = animations[currentStep];
+        //   if (servoArr == null) break;
+        // }
     }
 }

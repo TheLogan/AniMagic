@@ -1,0 +1,9 @@
+.projectCard {
+  width: 200;
+  height: 200;
+  background-color: green;
+}
+
+.projectCard.active {
+  background-color: darkred;
+}

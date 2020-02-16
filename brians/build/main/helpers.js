@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const johnny_five_1 = require("johnny-five");
-const fs_1 = require("fs");
-const path = require("path");
 function createServos() {
     let arr = [];
     for (let i = 0; i < 6; i++) {
@@ -24,9 +22,9 @@ function sleep(time) {
 }
 exports.sleep = sleep;
 function loadJson() {
-    let filepath = path.join(__dirname, 'MockData/Rig.jsonc');
-    let file = fs_1.readFileSync(filepath, 'utf8');
-    let data = JSON.parse(file);
-    console.log('data', data);
+    // let filepath = path.join(__dirname, 'MockData/Rig.jsonc')
+    // let file = readFileSync(filepath, 'utf8');
+    // let data = JSON.parse(file);
+    // console.log('data', data);
 }
 exports.loadJson = loadJson;

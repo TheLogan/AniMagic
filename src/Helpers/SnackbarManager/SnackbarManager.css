@@ -1,0 +1,7 @@
+.snackbar.success {
+  background-color: green;
+}
+
+.snackbar.error {
+  background-color: darkred;
+}

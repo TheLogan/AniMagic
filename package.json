@@ -3,21 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.7.0",
-    "@types/jest": "24.0.23",
-    "@types/node": "^12.12.14",
-    "@types/react": "16.9.13",
-    "@types/react-dom": "16.9.4",
-    "@types/react-router": "^5.1.3",
+    "@material-ui/core": "^4.9.2",
+    "@types/jest": "^25.1.2",
+    "@types/node": "^13.7.1",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-router": "^5.1.4",
     "@types/react-router-dom": "^5.1.3",
-    "gojs": "^2.1.2",
-    "gojs-react": "^1.0.4",
+    "axios": "^0.19.2",
+    "gojs": "^2.1.8",
+    "gojs-react": "^1.0.5",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-draggable": "^4.2.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
-    "typescript": "3.7.2"
+    "react-scripts": "^3.3.1",
+    "typescript": "^3.7.5",
+    "uuid": "^3.4.0"
   },
   "main": "src/electron-starter.ts",
   "scripts": {
@@ -43,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/uuid": "^3.4.7",
     "electron": "^7.1.2"
   }
 }
