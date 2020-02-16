@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Button, Grid, Tooltip } from "@material-ui/core";
 import './Main.css'
-import { Project } from "../../../Models/Project";
 import { inject, observer } from "mobx-react";
 import { ProjectStore } from "../../../Mobx/ProjectStore";
 

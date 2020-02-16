@@ -129,7 +129,7 @@ function SetupRig(props: IProps) {
             key={servo.id}
             onStop={(e, data) => setPosition(servo.id, data)} cancel=".CardContent"
           >
-            <Card style={{ position: 'absolute', zIndex: 99999 - servo.htmlPosY }} >
+            <Card style={{ position: 'absolute', zIndex: window.screen.height - servo.htmlPosY, width: '300px', height: '200px' }} className="rigCard" >
               <CardHeader className="unselectableText"
                 title={servo.title}
                 action={<Button onClick={() => removeCard(servo.id)}>X</Button>}

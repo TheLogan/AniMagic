@@ -35,7 +35,6 @@ router.get('/load', (req: Request, res: Response) => {
   }
 });
 
-module.exports = router;
 
 function loadProjectFiles(dirname) {
   try {
@@ -51,3 +50,5 @@ function loadProjectFiles(dirname) {
     return 'could not find project files';
   }
 }
+
+module.exports = router;

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Button, Grid, TextField } from '@material-ui/core';
-import { ProjectHelper } from '../../../Helpers/ProjectHelper';
-import { Project } from '../../../Models/Project';
 import { SnackbarManager } from '../../../Helpers/SnackbarManager/SnackbarManager';
 import { observer, inject } from "mobx-react";
 import { ProjectStore } from '../../../Mobx/ProjectStore'

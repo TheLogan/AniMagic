@@ -1,15 +1,14 @@
+import uuidv1 from 'uuid/v1';
+import { BlendShapeServo } from "./BlendShapeServo";
+
 export class BlendShape {
-  // needs to save servo data (id)
-
-
-}
-
-export class BlendShapeServo {
   id: string;
-  position: number;
+  name: string;
+  servos: BlendShapeServo[];
 
-  constructor(val: Partial<BlendShapeServo>) {
-    this.id = val.id || '';
-    this.position = val.position || 90;
+  constructor(val: Partial<BlendShape>) {
+    this.id = val.id || uuidv1();
+    this.name = val.name || 'blendshape';
+    this.servos = val.servos || [];
   }
 }

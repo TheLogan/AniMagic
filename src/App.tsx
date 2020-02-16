@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch, RouteComponentProps } from "react-router-
 import Main from "./Components/Routes/Main/Main";
 import { createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';
 import SetupRig from './Components/Routes/SetupRig/SetupRig';
-import { BlendshapeEditor } from './Components/Routes/BlendshapeEditor/BlendshapeEditor';
+import BlendshapeEditor from './Components/Routes/BlendshapeEditor/BlendshapeEditor';
 import CreateProject from './Components/Routes/CreateProject/CreateProject';
 import { SnackbarManager } from './Helpers/SnackbarManager/SnackbarManager';
 import LoadProject from './Components/Routes/LoadProject/LoadProject';
@@ -43,6 +43,7 @@ function App(props: IProps) {
         //TODO: Save project
       }
     }, false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function saveProject() {
@@ -53,6 +54,7 @@ function App(props: IProps) {
       SnackbarManager.Instance.addError(result);
     } else {
       SnackbarManager.Instance.addSuccess('Project saved');
+      props.ProjectStore.isDirty = false;
     }
   }
 
