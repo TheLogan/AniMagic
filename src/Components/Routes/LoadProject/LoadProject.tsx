@@ -7,13 +7,12 @@ import { SnackbarManager } from '../../../Helpers/SnackbarManager/SnackbarManage
 import "./LoadProject.css";
 import { observer, inject } from 'mobx-react';
 import { ProjectStore } from '../../../Mobx/ProjectStore';
-import { ServoHelper } from '../../../Helpers/ServoHelper';
+import { ServoManager } from '../../../Helpers/ServoManager';
 
 interface IProps extends RouteComponentProps { ProjectStore: ProjectStore }
 
 function LoadProject(props: IProps) {
   const [projectHelper] = useState(new ProjectHelper());
-  const [servoHelper] = useState(new ServoHelper());
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedProject, setSelectedProject] = useState('')
 
@@ -24,14 +23,14 @@ function LoadProject(props: IProps) {
 
   async function getProjects() {
     let allProjects = await projectHelper.loadProjects();
-    if (!Array.isArray(allProjects)) return SnackbarManager.Instance.addError(allProjects);
+    if (!Array.isArray(allProjects)) return SnackbarManager.Instance.addError('could not load projects');
     setProjects(allProjects);
   }
 
   function doLoadProject() {
     let project = projects.find(x => x.projectName === selectedProject);
     if (!selectedProject || !project) return SnackbarManager.Instance.addError('No project selected');
-    servoHelper.centerAll(project.rig);
+    ServoManager.Instance.centerAll(project.rig);
 
 
     SnackbarManager.Instance.addSuccess('Project loaded');

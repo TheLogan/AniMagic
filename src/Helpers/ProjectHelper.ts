@@ -1,36 +1,34 @@
-import Axios, { AxiosRequestConfig } from "axios";
 import { Project } from "../Models/Project";
+import { getSavesPath } from "./FileHelper";
+import { SnackbarManager } from "./SnackbarManager/SnackbarManager";
+const electron = window.require('electron');
+let fs = electron.remote.require('fs');
+let path = electron.remote.require('path');
 
 export class ProjectHelper {
   async saveProject(project: Project) {
     try {
-      let config: AxiosRequestConfig = {
-        method: 'POST',
-        baseURL: 'http://localhost:4003',
-        url: '/project/save',
-        data: {
-          project
-        }
-      }
-      let response = await Axios(config);
-      return response.data;
+      if (!project) return false;
+      let filepath = path.join(getSavesPath(), project.projectName + '.animagic');
+      fs.writeFileSync(filepath, JSON.stringify(project));
+      return true;
     } catch (error) {
-      return null;
+      return false;
     }
   }
 
   async loadProjects() {
     try {
-      let config: AxiosRequestConfig = {
-        method: 'GET',
-        baseURL: 'http://localhost:4003',
-        url: '/project/load'
+      let dirname = getSavesPath();
+      let filenames = fs.readdirSync(dirname);
+      let projects: Project[] = [];
+      for (const fileName of filenames) {
+        let fileStr = fs.readFileSync(path.join(dirname, fileName), 'utf-8');
+        projects.push(JSON.parse(fileStr));
       }
-
-      let response = await Axios(config);
-      return response.data;
+      return projects;
     } catch (error) {
-
+      SnackbarManager.Instance.addError('Could not load project files')
     }
   }
 }

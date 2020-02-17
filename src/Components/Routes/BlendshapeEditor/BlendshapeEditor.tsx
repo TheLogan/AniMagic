@@ -7,14 +7,12 @@ import { observer, inject } from 'mobx-react';
 import { ProjectStore } from '../../../Mobx/ProjectStore';
 import Draggable from 'react-draggable';
 import { SnackbarManager } from '../../../Helpers/SnackbarManager/SnackbarManager';
-import { ServoHelper } from '../../../Helpers/ServoHelper';
+import { ServoManager } from '../../../Helpers/ServoManager';
 
 interface IProps extends RouteComponentProps { ProjectStore: ProjectStore }
 
 function BlendshapeEditor(props: IProps) {
   const [selectedBlendshape, setSelectedBlendshape] = useState('');
-  const [servoHelper] = useState(new ServoHelper())
-
 
   useEffect(() => { }, [props.ProjectStore.blendShapes])
 
@@ -33,7 +31,7 @@ function BlendshapeEditor(props: IProps) {
     if (result === false) SnackbarManager.Instance.addError('Fatal Error: Could not save value');
 
     // Send value to the server
-    servoHelper.moveToPosition(servo, value);
+    ServoManager.Instance.moveToPosition(servo, value);
   }
 
   function renderBody() {
@@ -85,7 +83,7 @@ function BlendshapeEditor(props: IProps) {
     let blendshape = props.ProjectStore.blendShapes.find(x => x.id === id);
     if (!blendshape) return;
     setSelectedBlendshape(id);
-    servoHelper.moveToBlendShape(blendshape, props.ProjectStore.rig);
+    ServoManager.Instance.moveToBlendShape(blendshape, props.ProjectStore.rig);
     //TODO: Send positions to the board
   }
 

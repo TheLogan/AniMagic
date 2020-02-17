@@ -11,6 +11,7 @@ import LoadProject from './Components/Routes/LoadProject/LoadProject';
 import { observer, inject } from 'mobx-react';
 import { ProjectStore } from './Mobx/ProjectStore'
 import { ProjectHelper } from './Helpers/ProjectHelper';
+import { ServoManager } from './Helpers/ServoManager';
 
 interface IProps extends RouteComponentProps { ProjectStore: ProjectStore }
 
@@ -32,6 +33,7 @@ const darkTheme = createMuiTheme({
 
 function App(props: IProps) {
   const [projectHelper] = useState(new ProjectHelper());
+  useState(new ServoManager())
 
   useEffect(() => {
     document.addEventListener("keydown", function (e) {
@@ -49,9 +51,9 @@ function App(props: IProps) {
   async function saveProject() {
     let project = props.ProjectStore.getProject();
     if (!project) return SnackbarManager.Instance.addError('No project to save');
-    let result = await projectHelper.saveProject(project);
+    let result: boolean = await projectHelper.saveProject(project);
     if (result !== true) {
-      SnackbarManager.Instance.addError(result);
+      SnackbarManager.Instance.addError('could not load files');
     } else {
       SnackbarManager.Instance.addSuccess('Project saved');
       props.ProjectStore.isDirty = false;

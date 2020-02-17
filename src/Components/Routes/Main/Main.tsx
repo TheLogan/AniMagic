@@ -5,6 +5,7 @@ import './Main.css'
 import { inject, observer } from "mobx-react";
 import { ProjectStore } from "../../../Mobx/ProjectStore";
 
+
 interface IProps extends RouteComponentProps { ProjectStore: ProjectStore }
 
 function Main(props: IProps) {

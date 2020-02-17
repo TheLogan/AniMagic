@@ -3,12 +3,12 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Button, Grid, Card, CardContent, TextField, CardHeader, ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails } from '@material-ui/core';
 import { Header } from './Header';
 import Draggable, { DraggableData } from "react-draggable";
-import { Servo } from '../../../Models/Servo';
+import { ServoModel } from '../../../Models/ServoModel';
 import uuidv1 from 'uuid/v1';
 import './SetupRig.css';
 import { parseTextFile } from '../../../Helpers/FileHelper';
 import { RigData } from '../../../Models/RigData';
-import { ServoHelper } from '../../../Helpers/ServoHelper';
+import { ServoManager } from '../../../Helpers/ServoManager';
 import { SnackbarManager } from '../../../Helpers/SnackbarManager/SnackbarManager';
 import { inject, observer } from 'mobx-react';
 import { ProjectStore } from '../../../Mobx/ProjectStore'
@@ -16,14 +16,13 @@ import { ProjectStore } from '../../../Mobx/ProjectStore'
 interface IProps extends RouteComponentProps { ProjectStore: ProjectStore }
 
 function SetupRig(props: IProps) {
-  const [servoHelper] = useState(new ServoHelper());
   const [expandedServos, setExpandedServos] = useState<string[]>([])
 
   useEffect(() => {
   }, [props.ProjectStore.rig])
 
   function addCard() {
-    let servo = new Servo({
+    let servo = new ServoModel({
       id: uuidv1(),
     });
     let rig = [...props.ProjectStore.getRig(), servo];
@@ -64,7 +63,7 @@ function SetupRig(props: IProps) {
     if (changed == null) return;
     changed.min = val;
     props.ProjectStore.setRig(localServos);
-    servoHelper.moveToMinServoTarget(changed);
+    ServoManager.Instance.moveToPosition(changed, val);
   }
 
   function setMax(id: string, val: number) {
@@ -73,7 +72,7 @@ function SetupRig(props: IProps) {
     if (changed == null) return;
     changed.max = val;
     props.ProjectStore.setRig(localServos);
-    servoHelper.moveToMaxServoTarget(changed);
+    ServoManager.Instance.moveToPosition(changed, val);
   }
 
   function setDefaultPosition(id: string, val: number) {
@@ -82,7 +81,7 @@ function SetupRig(props: IProps) {
     if (changed == null) return;
     changed.defaultPos = val;
     props.ProjectStore.setRig(localServos);
-    servoHelper.moveToDefaultVal(changed);
+    ServoManager.Instance.moveToPosition(changed, val);
   }
 
   function toggleExpanded(id: string) {

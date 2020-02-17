@@ -1,6 +1,6 @@
 import { observable, action, computed, autorun } from "mobx";
 import { Project } from "../Models/Project";
-import { Servo } from "../Models/Servo";
+import { ServoModel } from "../Models/ServoModel";
 import { SnackbarManager } from "../Helpers/SnackbarManager/SnackbarManager";
 import { BlendShape } from "../Models/BlendShape";
 import { BlendShapeServo } from "../Models/BlendShapeServo";
@@ -13,7 +13,7 @@ export class ProjectStore {
   isDirty: boolean = false;
 
   @observable
-  rig: Servo[] = [];
+  rig: ServoModel[] = [];
 
   @observable.deep
   blendShapes: BlendShape[] = [];
@@ -43,7 +43,7 @@ export class ProjectStore {
   }
 
   @action
-  setRig = (servos: Servo[]) => {
+  setRig = (servos: ServoModel[]) => {
     if (!this.projectName) return SnackbarManager.Instance.addError('No project to add rig to');
     this.rig = servos;
     this.isDirty = true;

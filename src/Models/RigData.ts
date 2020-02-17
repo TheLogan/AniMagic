@@ -1,8 +1,8 @@
-import { Servo } from "./Servo";
+import { ServoModel } from "./ServoModel";
 
 export class RigData {
   projectName: string;
-  servos: Servo[];
+  servos: ServoModel[];
 
   constructor(val: Partial<RigData>) {
     this.projectName = val.projectName || '';

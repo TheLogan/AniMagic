@@ -1,7 +1,7 @@
 import uuidv1 from 'uuid/v1';
 
 
-export class Servo {
+export class ServoModel {
   id: string;
   max: number;
   min: number;
@@ -12,7 +12,7 @@ export class Servo {
   htmlPosX: number;
   htmlPosY: number;
 
-  constructor(val: Partial<Servo>) {
+  constructor(val: Partial<ServoModel>) {
     this.id = val.id || uuidv1();
 
     if (val.max == null) this.max = 180;

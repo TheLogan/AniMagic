@@ -1,9 +1,9 @@
-import { Servo } from "./Servo";
+import { ServoModel } from "./ServoModel";
 import { BlendShape } from "./BlendShape";
 
 export class Project {
   projectName: string;
-  rig: Servo[];
+  rig: ServoModel[];
   blendShapes: BlendShape[];
 
   constructor(val: Partial<Project>) {

@@ -1,3 +1,9 @@
+const electron = window.require('electron');
+const fs = electron.remote.require('fs');
+const app = electron.remote.app;
+let path = electron.remote.require('path');
+
+
 export function parseTextFile(file: File): Promise<string[] | any> {
   // Always return a Promise
   return new Promise((resolve, reject) => {
@@ -15,4 +21,14 @@ export function parseTextFile(file: File): Promise<string[] | any> {
     };
     reader.readAsText(file);
   });
+}
+
+
+export function getSavesPath() {
+  return path.join(app.getAppPath(), 'saves');
+}
+export function createStructure() {
+  if (!fs.existsSync(getSavesPath())) {
+    fs.mkdirSync(getSavesPath());
+  }
 }
