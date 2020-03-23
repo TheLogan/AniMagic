@@ -6,10 +6,7 @@ import Draggable, { DraggableData } from "react-draggable";
 import { ServoModel } from '../../../Models/ServoModel';
 import uuidv1 from 'uuid/v1';
 import './SetupRig.css';
-import { parseTextFile } from '../../../Helpers/FileHelper';
-import { RigData } from '../../../Models/RigData';
 import { ServoManager } from '../../../Helpers/ServoManager';
-import { SnackbarManager } from '../../../Helpers/SnackbarManager/SnackbarManager';
 import { inject, observer } from 'mobx-react';
 import { ProjectStore } from '../../../Mobx/ProjectStore'
 
@@ -104,23 +101,9 @@ function SetupRig(props: IProps) {
     props.ProjectStore.setRig(localServos);
   }
 
-  async function loadFile(a: any) {
-    try {
-      let file = a.target.files[0];
-      if (!file) { SnackbarManager.Instance.addError('Could not load file'); }
-      let strArr = await parseTextFile(a.target.files[0]);
-      let obj: RigData = JSON.parse(strArr[0]);
-      props.ProjectStore.setRig(obj.servos);
-    } catch (error) {
-      console.log(error);
-      SnackbarManager.Instance.addError('Error thrown during upload process, see console');
-    }
-  }
-
-
   return (
     <Grid container>
-      <Header addCard={addCard} load={loadFile} {...props} />
+      <Header addCard={addCard} {...props} />
       {props.ProjectStore.getRig().map(servo => {
         return (
           <Draggable

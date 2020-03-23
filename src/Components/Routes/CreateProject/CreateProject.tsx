@@ -19,16 +19,35 @@ function CreateProject(props: IProps) {
     props.history.push('/');
   }
 
-  return <Grid>
-    <TextField
-      label="Project name"
-      value={projectName}
-      onChange={e => setProjectName(e.target.value)}
-    />
-    <Button
-      onClick={createProjectFile}
-    >Create Project</Button>
-  </Grid>
+  return (
+    //<Grid container direction="column" className="fullHeight">
+    <Grid container item direction="column" alignItems="center" justify="center" className="fullHeight">
+      <Grid item>
+        <h3>Create project</h3>
+      </Grid>
+      <Grid item>
+        <TextField
+          label="Project name"
+          value={projectName}
+          onChange={e => setProjectName(e.target.value)}
+        />
+      </Grid>
+      <Grid item>
+        <Grid container direction="row" alignItems="center" justify="center" spacing={1}>
+          <Grid item>
+            <Button variant="contained" onClick={() => props.history.push('/')}>Back</Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              onClick={createProjectFile}
+            >Create Project</Button>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+    //</Grid>
+  )
 }
 
 const NewProject = inject('ProjectStore')(observer(CreateProject))

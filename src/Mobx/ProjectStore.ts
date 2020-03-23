@@ -18,6 +18,14 @@ export class ProjectStore {
   @observable.deep
   blendShapes: BlendShape[] = [];
 
+  @observable
+  boardConnected: boolean = false;
+
+  @action
+  boardConnectionChanged = (isConnected: boolean) => {
+    this.boardConnected = isConnected;
+  }
+
   @action
   addProject = (project: Project) => {
     this.projectName = project.projectName;

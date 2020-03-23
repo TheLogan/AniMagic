@@ -19,7 +19,10 @@ export class ProjectHelper {
 
   async loadProjects() {
     try {
+      console.log('loading projects');
+      
       let dirname = getSavesPath();
+      console.log('dirname', dirname);
       let filenames = fs.readdirSync(dirname);
       let projects: Project[] = [];
       for (const fileName of filenames) {
@@ -28,6 +31,7 @@ export class ProjectHelper {
       }
       return projects;
     } catch (error) {
+      console.log(error)
       SnackbarManager.Instance.addError('Could not load project files')
     }
   }

@@ -4,6 +4,7 @@ import { Button, Grid, Tooltip } from "@material-ui/core";
 import './Main.css'
 import { inject, observer } from "mobx-react";
 import { ProjectStore } from "../../../Mobx/ProjectStore";
+import { ServoManager } from "../../../Helpers/ServoManager";
 
 
 interface IProps extends RouteComponentProps { ProjectStore: ProjectStore }
@@ -39,6 +40,7 @@ function Main(props: IProps) {
                     <Button color="primary" onClick={() => props.history.push('/editblendshapes')} disabled={getBlendshapeTooltip() !== ""}>Blendshapes</Button>
                 </Grid>
             </Tooltip>
+            <Button onClick={() => ServoManager.Instance.createNewBoard()}>Connect board</Button>
         </Grid>)
 }
 

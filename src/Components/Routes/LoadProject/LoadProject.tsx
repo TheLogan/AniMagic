@@ -45,7 +45,7 @@ function LoadProject(props: IProps) {
     for (const project of projects) {
       arr.push(
         // align-self: auto | flex-start | flex-end | center | baseline | stretch;
-        <Box alignSelf="center">
+        <Box alignSelf="center" key={project.projectName}>
           <Card
             key={project.projectName}
             className={"projectCard" + (project.projectName === selectedProject ? " active" : "")}
@@ -75,6 +75,7 @@ function LoadProject(props: IProps) {
     </Grid>
     <Grid item xs={1}>
       <Button variant="contained" color="primary" onClick={doLoadProject}>Load</Button>
+      <Button variant="contained" color="primary" onClick={() => props.history.push('/')}>Back</Button>
     </Grid>
   </Grid>
 }
