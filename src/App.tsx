@@ -12,6 +12,7 @@ import { observer, inject } from 'mobx-react';
 import { ProjectStore } from './Mobx/ProjectStore'
 import { ProjectHelper } from './Helpers/ProjectHelper';
 import { ServoManager } from './Helpers/ServoManager';
+import { createStructure } from './Helpers/FileHelper';
 
 interface IProps extends RouteComponentProps { ProjectStore: ProjectStore }
 
@@ -45,6 +46,7 @@ function App(props: IProps) {
         //TODO: Save project
       }
     }, false);
+    createStructure();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -53,7 +55,7 @@ function App(props: IProps) {
     if (!project) return SnackbarManager.Instance.addError('No project to save');
     let result: boolean = await projectHelper.saveProject(project);
     if (result !== true) {
-      SnackbarManager.Instance.addError('could not load files');
+      SnackbarManager.Instance.addError('could not save files');
     } else {
       SnackbarManager.Instance.addSuccess('Project saved');
       props.ProjectStore.isDirty = false;

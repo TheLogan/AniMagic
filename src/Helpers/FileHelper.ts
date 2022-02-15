@@ -25,7 +25,7 @@ export function parseTextFile(file: File): Promise<string[] | any> {
 
 
 export function getSavesPath() {
-  return path.join(app.getAppPath(), 'saves');
+  return path.join(app.getPath('userData'), 'saves');
 }
 export function createStructure() {
   if (!fs.existsSync(getSavesPath())) {

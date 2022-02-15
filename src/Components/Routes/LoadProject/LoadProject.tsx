@@ -39,9 +39,10 @@ function LoadProject(props: IProps) {
   }
 
   function renderCards() {
-    console.log('projects.length', projects.length);
     let arr = []
-
+    if (projects.length < 1) {
+      return <h1>No projects yet</h1>
+    }
     for (const project of projects) {
       arr.push(
         // align-self: auto | flex-start | flex-end | center | baseline | stretch;
